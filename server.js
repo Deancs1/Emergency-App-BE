@@ -19,6 +19,6 @@ app.get("/", (req, res) => {
 
 app.use("/api", countryRoutes);
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`Server running on http://localhost:${port}`.bgGreen.black);
 });
