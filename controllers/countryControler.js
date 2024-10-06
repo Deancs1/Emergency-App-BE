@@ -2,11 +2,7 @@
 const mongoose = require("mongoose");
 
 const countrySchema = new mongoose.Schema({}, { strict: false });
-const Country = mongoose.model(
-  "Country",
-  countrySchema,
-  "List-Of-Emergency-Telephone-Numbers"
-);
+const Country = mongoose.model("Country", countrySchema, "countries");
 
 // fetch all countries and their emergency data
 const getAllCountries = async (req, res) => {
