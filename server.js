@@ -33,6 +33,38 @@ app.get("/api/pharmacies", async (req, res) => {
   }
 });
 
+// New endpoint for fetching nearby hospitals
+app.get("/api/hospitals", async (req, res) => {
+  const { lat, lng } = req.query;
+  console.log(lng, lat);
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  try {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=5000&type=hospital&key=${apiKey}`
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).send("Error fetching data");
+  }
+});
+
+// New endpoint for fetching nearby doctors
+app.get("/api/doctors", async (req, res) => {
+  const { lat, lng } = req.query;
+  console.log(lng, lat);
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  try {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=5000&type=doctor&key=${apiKey}`
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).send("Error fetching data");
+  }
+});
+
 app.use("/api", countryRoutes);
 
 app.listen(port, "0.0.0.0", () => {
