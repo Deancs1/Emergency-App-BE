@@ -24,7 +24,7 @@ app.get("/api/pharmacies", async (req, res) => {
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
   try {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=5000&type=pharmacy&key=${apiKey}`
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=7000&type=pharmacy&key=${apiKey}`
     );
     const data = await response.json();
     res.json(data);
@@ -40,7 +40,7 @@ app.get("/api/hospitals", async (req, res) => {
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
   try {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=5000&type=hospital&key=${apiKey}`
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=7000&type=hospital&key=${apiKey}`
     );
     const data = await response.json();
     res.json(data);
@@ -56,7 +56,7 @@ app.get("/api/doctors", async (req, res) => {
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
   try {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=5000&type=doctor&key=${apiKey}`
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=7000&type=doctor&key=${apiKey}`
     );
     const data = await response.json();
     res.json(data);
