@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const fetch = require("node-fetch");
 require("dotenv").config();
 require("colors");
 const cors = require("cors");
@@ -15,6 +16,21 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send("Welcome to the emergency API!");
+});
+
+app.get("/api/pharmacies", async (req, res) => {
+  const { lat, lng } = req.query;
+  console.log(lng, lat);
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  try {
+    const response = await fetch(
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=5000&type=pharmacy&key=${apiKey}`
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).send("Error fetching data");
+  }
 });
 
 app.use("/api", countryRoutes);
